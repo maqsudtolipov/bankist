@@ -82,11 +82,28 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -194,6 +211,10 @@ currenciesUnique.forEach(function (value, _, map) {
 });
 */
 
+/////////////////////////////////////////////////
+// Coding challenge
+
+/*
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCorrected = dogsJulia.slice();
   dogsJuliaCorrected.splice(0, 1);
@@ -211,3 +232,104 @@ const checkDogs = function (dogsJulia, dogsKate) {
   });
 };
 checkDogs([3, 5, 2, 12, 17], [4, 1, 15, 8, 3]);
+*/
+
+/////////////////////////////////////////////////
+// Map method
+
+/*
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
+);
+console.log(movementsDescriptions);
+*/
+
+/////////////////////////////////////////////////
+// Filter method
+
+/*
+const eurToUsd = 1.1;
+
+const deposits = movements.filter(function (mov, i, arr) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+const withdrawals = movements.filter(mov => mov < 0);
+
+console.log(withdrawals);
+*/
+
+/////////////////////////////////////////////////
+// Reduce method
+
+/*
+console.log(movements);
+
+// accumulator => SNAWBALL ⛄🏐
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteraton ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+console.log(balance);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// Maximum value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
+*/
+
+/////////////////////////////////////////////////
+// Coding challenge #2
+
+/*
+const calcAverageHumanAge = function (ages) {
+  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = humanAges.filter(dog => dog >= 18);
+
+  console.log(humanAges);
+  console.log(adults);
+
+  // const average = adults.reduce((acc, dog) => acc + dog, 0) / adults.length;
+
+  const average = adults.reduce(
+    (acc, dog, i, arr) => acc + dog / arr.length,
+    0
+  );
+
+  return average;
+};
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+*/
+
+const eurToUsd = 1.1;
+const totalDepositsUSD movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * 1.1)
+  .reduce((acc, mov) => acc + mov, 0);
