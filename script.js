@@ -329,7 +329,8 @@ console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 */
 
 const eurToUsd = 1.1;
-const totalDepositsUSD movements
+const totalDepositsUSD = movements
   .filter(mov => mov > 0)
   .map(mov => mov * 1.1)
   .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
