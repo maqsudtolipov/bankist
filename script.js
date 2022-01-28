@@ -164,6 +164,7 @@ btnTransfer.addEventListener('click', function (e) {
     acc => acc.username === inputTransferTo.value
   );
   inputTransferAmount.value = inputTransferTo.value = '';
+
   if (
     amount > 0 &&
     revieverAcc &&
@@ -177,6 +178,28 @@ btnTransfer.addEventListener('click', function (e) {
     // Update UI
     updateUI(currentAccount);
   }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    console.log(index);
+    // .indexOf(23)
+
+    // Delete account
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 /////////////////////////////////////////////////
